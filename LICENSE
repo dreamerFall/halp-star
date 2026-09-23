@@ -1,89 +1,21 @@
-# Group-Fork-Contributors License (GFC License)
-Version 1.0
+MIT License
 
-This license is designed for free and open-source projects. Its goal is to
-respect the original creator, contributors, and those who fork and share
-changes.
+Copyright (c) 2026 DreamerFALL
 
----
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-## 1. Freedom to Use
-Users may freely use, study, run, modify, and distribute this project,
-provided the conditions of this license are met.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## 2. No License Change
-The text of this license must not be modified in any way. Any project based
-on this project must retain this exact license text.
-
-## 3. Contributors Section (Mandatory)
-The name of the original creator and all collaborators who contributed to
-the project must be listed in the Contributors section of the GitHub
-repository. This section is mandatory and must not be removed.
-
-- Adding new people to Contributors is allowed.
-- Even if someone made only a small change, you may add them if you wish
-  (not mandatory, except in the fork case described in Section 5).
-- Removing names from Contributors is prohibited.
-- Even if you collaborated with someone, they must be in Contributors.
-
-## 4. Forking
-- The only way to modify this project is to fork it.
-- The fork must be linked to the original project and to related forks.
-- A fork with no changes compared to the original project is not valid.
-- Every fork must have at least one meaningful difference from the original
-  project.
-
-## 5. Using Other People's Forks
-If you use code from someone else's fork in your project:
-- You must add their name(s) to the Contributors section of your project.
-- You must include the link to their fork repository in your project's
-  README.md.
-- If your project is based on two or more forks, you may (optionally) add a
-  Credits section in README.md, but the Contributors section is mandatory.
-
-## 6. Fork Naming
-- A fork's name must not follow the pattern `"name"_better`, because this
-  implies the original project was bad. This pattern is only allowed for the
-  original project itself (i.e., if the original creator upgrades their
-  project).
-- Using the pattern `"name"_plus` is allowed, because it indicates
-  collaboration and improvement and is not an insult to the original project.
-- If you upgrade your project to a separate repository, the old project must
-  remain in the fork list and you must write at the end of its description:
-  `(older version of this)`
-
-## 7. Monetization and Sales
-- The original project may optionally receive financial support via Sponsor
-  or Donate. This is allowed.
-- Forked projects can never be purchased or be paid.
-- Selling the project (original or fork) is prohibited under any
-  circumstances.
-- The purpose of this project is learning, sharing, and collaboration, not
-  profit.
-
-## 8. README.md (Mandatory)
-- Every project (original and fork) must have a README.md file.
-- The content of README.md must be related to the project.
-- In the README.md of forked projects, the link to the original project and
-  related forks (if used) must be mentioned.
-- Do not put fake fork links unless you have actually used them.
-
-## 9. Professional Behavior
-- In any file, message, commit, repository name, or description, there must
-  be no bad language, insults, or inappropriate content.
-- Do not put irrelevant or fake fork links in README unless you have actually
-  used them.
-
-## 10. Contact
-If you have any questions, concerns, or issues regarding this license,
-please contact via Telegram:
-
-**Telegram:** [@DreamerFALL](https://t.me/DreamerFALL)
-
-Please behave respectfully. The goal of this license is cooperation and
-mutual respect, not trouble.
-
----
-
-This license may be used by anyone for their own projects, provided the text
-remains unchanged.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
