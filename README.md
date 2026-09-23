@@ -5,4 +5,4 @@
 - __add classes__
 - __Removed duplicate library imports__
 ## thanks
-Special thanks to @pin-toto for pointing out these bugs and teaching me how classes work
+Special thanks to [@pin-toto](https://github.com/pin-toto)@pin-toto for pointing out these bugs and teaching me how classes work
