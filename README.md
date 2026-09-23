@@ -1,4 +1,8 @@
-1.record your voice then take your word and convert it into a text<br>
-2.then run commands or speak with (pyttsx3)<br>
-<br>
-that it
+## updates
+- __Fixed a bug where the TTS engine was being initialized repeatedly instead of once__
+- __add loading__
+- __cleaner code__
+- __add classes__
+- __Removed duplicate library imports__
+## thanks
+Special thanks to @pin-toto for pointing out these bugs and teaching me how classes work
