@@ -1,3 +1,5 @@
+## help
+for god sake download vosk model and set your model in **data.json**
 ## updates
 - __Fixed a bug where the TTS engine was being initialized repeatedly instead of once__
 - __add loading__
