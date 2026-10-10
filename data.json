@@ -1,5 +1,8 @@
 {
     "name": "",
-    "model": "----",
-    "vers": "1.0.1"
+    "model": "",
+    "vers": "1.1.0",
+    "speech-mode": false,
+    "speed":200,
+    "speak-pyttsx":true
 }
