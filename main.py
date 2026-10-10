@@ -1,21 +1,24 @@
 from talk_module import *
 from random import choice
-from webbrowser import open
-
+from webbrowser import open as search
+from keyboard import block_key, unblock_key
+from joke.main import joke
+block_key("ctrl")#stop the vosk crashing
 goodbye = 0
 # list
-list_hello = ["hello", "hi", "hey"]
-list_bye = ["bye", "goodbye", "good bye", "see you later"]
+list_hello = ("hello", "hi", "hey")
+list_bye = ("bye", "goodbye", "good bye", "see you later")
 # start loading
+hear = Hear()
+speak = Speak()
+unblock_key("ctrl")#done
 try:
-    hear = Hear()
-    speak = Speak()
-    print("done")
-    clear()
-
     while True:
-        user = hear.start()
-
+        clear()
+        if hear.data["speech-mode"] is True:
+            user = hear.start()
+        else:
+            user = input("--")
         match user:
             case _ if user.startswith("my name is "):
                 name_save = user.replace("my name is ", "")
@@ -36,7 +39,7 @@ try:
             case _ if user.startswith("search "):
                 user = user.replace("search ", "")
                 user = user.replace(" ", "+")
-                open("https://google.com/search?q=" + user)
+                search("https://google.com/search?q=" + user)
 
             case "help":
                 speak.start(
@@ -50,25 +53,31 @@ try:
                     "hello , hi , hey : will say hello back to you\n"
                     "bye , goodbye , good bye : for exit\n"
                     "you can also press (crlt+c) for exit too\n"
-                    "search [---] : for searching [---]\n"
+                    "search (name) : for searching (name)\n"
                     "help : for help\n"
                     "command : for commands list\n"
-                    "my name is [---] : for saving your name"
+                    "my name is (name) : for saving your name"
                 )
 
             case "what is your name" | "who are you":
-                speak.start("i am help-star and i want to help you")
+                speak.start("i am help star , and i want to help you")
 
             case "version":
                 speak.start(hear.data["vers"])
 
             case "joke":
-                joke = ["why chickens love pancake...idon't know"]
                 speak.start(choice(joke))
 
             case "what is my name":
                 speak.start(f"your name is {hear.data['name']}")
+            case "speech mode":
+                if hear.data["speech-mode"] == False:
+                    hear.data["speech-mode"] = True
+                else:
+                    hear.data["speech-mode"] = False
 
+                with open("data.json", "w") as f:
+                    dump(hear.data, f, indent=4)
 except KeyboardInterrupt:
     try:
         print(Fore.RESET, end="")
