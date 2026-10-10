@@ -6,16 +6,17 @@ what about "openai-wisper" you mght ask?... didn't installed either
 nothing...but i find a way and that was using 'vosk'
 and yeah that why i used extra module"""
 
+"""another problem i can't install piper(is a text-to-speech module)
+so we still gomma use pyttsx3"""
 import wave
-from os import name, system, path
 from pyttsx3 import init as ttsx
+from json import load, loads, dump, JSONDecodeError
+from os import name, system, path
 from colorama import Fore, init
 from time import sleep
 from vosk import Model, KaldiRecognizer, SetLogLevel
 from speech_recognition import Recognizer, Microphone
-from json import load, loads, dump
-
-
+from playsound3 import playsound, PlaysoundException
 def clear():
     if name == "nt":
         system("cls")
@@ -30,10 +31,9 @@ class JsonStart:
 
 
 class Hear(JsonStart):
+    print("loading")
     def __init__(self):
-        print("loading 2/1...")
         super().__init__()
-        SetLogLevel(-1)
         self.the_model = self.data["model"]
         self.model = Model(path.abspath(self.the_model))
 
@@ -41,6 +41,12 @@ class Hear(JsonStart):
         self,
     ):
         r = Recognizer()
+        try:
+            playsound(path.abspath("sfx/input.wav"), block=False)
+        except FileNotFoundError:
+            pass
+        except PlaysoundException:
+            pass
         print(Fore.LIGHTRED_EX + "recording...")
         with Microphone() as source:
             audio = r.listen(source)
@@ -61,18 +67,32 @@ class Hear(JsonStart):
         final_result = loads(rec.FinalResult())
         result_text.append(final_result.get("text", ""))
         full_transcript = " ".join(result_text).strip()
-        print(Fore.GREEN + full_transcript + Fore.RESET)
-        sleep(0.75)
+        nothing_catcher = full_transcript
+        nothing_catcher.replace(" ", "")
+        print(Fore.GREEN, end="")
+        if nothing_catcher=="":
+            print("...")
+        else:
+            print(full_transcript)
+        print(Fore.RESET, end="")
+        try:
+            playsound(path.abspath("sfx/output.wav"))
+        except FileNotFoundError:
+            sleep(0.75)
+        except PlaysoundException:
+            sleep(0.75)
         return full_transcript
 
 
-class Speak:
+class Speak(JsonStart):
     def __init__(self):
-        print("loading 2/2...")
+        super().__init__()
         init()
-        self.voice = ttsx()
+        self.voice=ttsx()
+        self.voice.setProperty("rate", self.data["speed"])
 
     def start(self, speech, text=None):
+        self.voice = ttsx()
         if text == None:
             text = speech
         print(text)
