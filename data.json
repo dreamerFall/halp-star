@@ -3,6 +3,5 @@
     "model": "",
     "vers": "1.1.0",
     "speech-mode": false,
-    "speed":200,
-    "speak-pyttsx":true
+    "speed":200
 }
