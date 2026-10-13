@@ -17,6 +17,8 @@ from time import sleep
 from vosk import Model, KaldiRecognizer, SetLogLevel
 from speech_recognition import Recognizer, Microphone
 from playsound3 import playsound, PlaysoundException
+
+
 def clear():
     if name == "nt":
         system("cls")
@@ -31,64 +33,67 @@ class JsonStart:
 
 
 class Hear(JsonStart):
-    print("loading")
     def __init__(self):
         super().__init__()
+        SetLogLevel(-1)
         self.the_model = self.data["model"]
         self.model = Model(path.abspath(self.the_model))
 
     def start(
         self,
     ):
-        r = Recognizer()
         try:
-            playsound(path.abspath("sfx/input.wav"), block=False)
-        except FileNotFoundError:
-            pass
-        except PlaysoundException:
-            pass
-        print(Fore.LIGHTRED_EX + "recording...")
-        with Microphone() as source:
-            audio = r.listen(source)
-        with open("audio_user.wav", "wb") as wav_get:
-            wav_get.write(audio.get_wav_data())
-        # text to speech
+            r = Recognizer()
+            try:
+                playsound(path.abspath("sfx/input.wav"), block=False)
+            except FileNotFoundError:
+                pass
+            except PlaysoundException:
+                pass
+            print(Fore.LIGHTRED_EX + "recording...")
+            with Microphone() as source:
+                audio = r.listen(source)
+            with open("audio_user.wav", "wb") as wav_get:
+                wav_get.write(audio.get_wav_data())
+            # text to speech
 
-        wf = wave.open(path.abspath("audio_user.wav"), "rb")
-        rec = KaldiRecognizer(self.model, wf.getframerate())
-        result_text = []
-        while True:
-            data = wf.readframes(4000)
-            if len(data) == 0:
-                break
-            if rec.AcceptWaveform(data):
-                result = loads(rec.Result())
-                result_text.append(result.get("text", ""))
-        final_result = loads(rec.FinalResult())
-        result_text.append(final_result.get("text", ""))
-        full_transcript = " ".join(result_text).strip()
-        nothing_catcher = full_transcript
-        nothing_catcher.replace(" ", "")
-        print(Fore.GREEN, end="")
-        if nothing_catcher=="":
-            print("...")
-        else:
-            print(full_transcript)
-        print(Fore.RESET, end="")
-        try:
-            playsound(path.abspath("sfx/output.wav"))
-        except FileNotFoundError:
-            sleep(0.75)
-        except PlaysoundException:
-            sleep(0.75)
-        return full_transcript
+            wf = wave.open(path.abspath("audio_user.wav"), "rb")
+            rec = KaldiRecognizer(self.model, wf.getframerate())
+            result_text = []
+            while True:
+                data = wf.readframes(4000)
+                if len(data) == 0:
+                    break
+                if rec.AcceptWaveform(data):
+                    result = loads(rec.Result())
+                    result_text.append(result.get("text", ""))
+            final_result = loads(rec.FinalResult())
+            result_text.append(final_result.get("text", ""))
+            full_transcript = " ".join(result_text).strip()
+            nothing_catcher = full_transcript
+            nothing_catcher.replace(" ", "")
+            print(Fore.GREEN, end="")
+            if nothing_catcher == "":
+                print("...")
+            else:
+                print(full_transcript)
+            print(Fore.RESET, end="")
+            try:
+                playsound(path.abspath("sfx/output.wav"))
+            except FileNotFoundError:
+                sleep(0.75)
+            except PlaysoundException:
+                sleep(0.75)
+            return full_transcript
+        except:
+            exit()
 
 
 class Speak(JsonStart):
     def __init__(self):
         super().__init__()
         init()
-        self.voice=ttsx()
+        self.voice = ttsx()
         self.voice.setProperty("rate", self.data["speed"])
 
     def start(self, speech, text=None):
