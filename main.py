@@ -1,18 +1,20 @@
 from talk_module import *
+from joke.main import joke
+
 from random import choice
 from webbrowser import open as search
-from keyboard import block_key, unblock_key
-from joke.main import joke
-block_key("ctrl")#stop the vosk crashing
-goodbye = 0
-# list
-list_hello = ("hello", "hi", "hey")
-list_bye = ("bye", "goodbye", "good bye", "see you later")
-# start loading
-hear = Hear()
-speak = Speak()
-unblock_key("ctrl")#done
+from signal import signal, SIGINT, SIG_IGN
 try:
+    block = signal(SIGINT, SIG_IGN)
+    # list
+    list_hello = ("hello", "hi", "hey")
+    list_bye = ("bye", "goodbye", "good bye", "see you later")
+    # start loading
+    hear = Hear()
+    speak = Speak()
+    signal(SIGINT, block)
+    del block
+
     while True:
         clear()
         if hear.data["speech-mode"] is True:
@@ -78,22 +80,17 @@ try:
 
                 with open("data.json", "w") as f:
                     dump(hear.data, f, indent=4)
-except KeyboardInterrupt:
+except BaseException as e:
     try:
-        print(Fore.RESET, end="")
-        speak.start(choice(list_bye) + " " + hear.data["name"])
-        goodbye = 1
+        block = signal(SIGINT, SIG_IGN)
+        error = type(e).__name__
+        msg_error = str(e)
+        if error == "KeyboardInterrupt" | "SystemExit":
+            pass
+        else:
+            print(error)
+        showmsg = input("want some details? (y)es (n)o\n").lower()
+        if showmsg == "y":
+            print(msg_error)
     except:
-        pass
-except AttributeError:
-    if goodbye == 1:
-        pass
-    else:
-        print("something wrong with model")
-except RuntimeError:
-    pass
-except:
-    print("error something is wrong")
-finally:
-    if goodbye == 1:
-        exit()
+        pass  # another anti-crashing
